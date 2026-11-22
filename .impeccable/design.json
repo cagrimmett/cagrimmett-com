@@ -1,0 +1,256 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-22T22:16:40+00:00",
+  "title": "Design System: cagrimmett-2026",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#faf8f4"
+      },
+      "wash": {
+        "role": "neutral",
+        "displayName": "Wash",
+        "canonical": "#efe9dd"
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#23201b"
+      },
+      "muted-ink": {
+        "role": "neutral",
+        "displayName": "Muted ink",
+        "canonical": "#6e675b"
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Rule",
+        "canonical": "#e3ddd1"
+      },
+      "rust": {
+        "role": "primary",
+        "displayName": "Rust",
+        "canonical": "#c0451d",
+        "tonalRamp": [
+          "#3a1408",
+          "#5e210d",
+          "#8f3214",
+          "#c0451d",
+          "#d96a45",
+          "#f08a63",
+          "#f7b9a0",
+          "#fbe3d8"
+        ]
+      },
+      "sage": {
+        "role": "secondary",
+        "displayName": "Sage",
+        "canonical": "#5d7052",
+        "tonalRamp": [
+          "#1d2419",
+          "#333e2c",
+          "#48573f",
+          "#5d7052",
+          "#768a6a",
+          "#8fa383",
+          "#b7c5ae",
+          "#e1e8dc"
+        ]
+      },
+      "paper-dark": {
+        "role": "neutral",
+        "displayName": "Paper (dark)",
+        "canonical": "#171512"
+      },
+      "wash-dark": {
+        "role": "neutral",
+        "displayName": "Wash (dark)",
+        "canonical": "#221f19"
+      },
+      "ink-dark": {
+        "role": "neutral",
+        "displayName": "Ink (dark)",
+        "canonical": "#e9e3d6"
+      },
+      "muted-ink-dark": {
+        "role": "neutral",
+        "displayName": "Muted ink (dark)",
+        "canonical": "#9c9384"
+      },
+      "rule-dark": {
+        "role": "neutral",
+        "displayName": "Rule (dark)",
+        "canonical": "#322e26"
+      },
+      "rust-dark": {
+        "role": "primary",
+        "displayName": "Rust (dark)",
+        "canonical": "#f08a63"
+      },
+      "sage-dark": {
+        "role": "secondary",
+        "displayName": "Sage (dark)",
+        "canonical": "#8fa383"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Page title on the full-post blog page only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Page titles and post titles."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Section and year headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All prose and list titles."
+      },
+      "nav": {
+        "displayName": "Nav",
+        "purpose": "Sidebar navigation."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Dates, categories, month labels, footer links."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Logo tilt, asterisk turn, arrow nudge."
+      },
+      {
+        "name": "ripple",
+        "value": "0.9s linear infinite",
+        "purpose": "Leader wave travelling along a hovered post row."
+      },
+      {
+        "name": "fade",
+        "value": "0.2s",
+        "purpose": "Colour and underline changes on hover."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "stack",
+        "value": "720px"
+      },
+      {
+        "name": "marks-stack",
+        "value": "520px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Post row",
+      "kind": "custom",
+      "refersTo": "post-row",
+      "description": "One line per post with a leader that ripples on hover.",
+      "html": "<a class=\"ds-row\" href=\"#\"><span class=\"ds-row-t\">Amawalk Redd Survey</span><span class=\"ds-row-lead\"></span><span class=\"ds-row-m\">Outdoors</span><span class=\"ds-row-m\">Nov 15</span></a>",
+      "css": ".ds-row{--paper:#faf8f4;--wash:#efe9dd;--ink:#23201b;--muted:#6e675b;--rule:#e3ddd1;--rust:#c0451d;--sage:#5d7052;display:flex;align-items:baseline;gap:.75rem;padding:.32rem 0;color:var(--ink);text-decoration:none;font:400 1.25rem/1.5 \"ET Book\",\"Iowan Old Style\",Palatino,Georgia,serif}.ds-row-m{font:.8125rem -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif;color:var(--muted);white-space:nowrap}.ds-row-lead{flex:1;height:8px;align-self:center;position:relative}.ds-row-lead::before,.ds-row-lead::after{content:\"\";position:absolute;inset:0;transition:opacity .25s}.ds-row-lead::before{top:50%;height:0;border-top:1px dotted var(--muted);opacity:.6}.ds-row-lead::after{opacity:0;background:var(--sage);-webkit-mask:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='8'%3E%3Cpath d='M0 4q6-5 12 0t12 0' fill='none' stroke='%23000' stroke-width='1.2'/%3E%3C/svg%3E\") 0 0/24px 8px repeat-x;mask:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='8'%3E%3Cpath d='M0 4q6-5 12 0t12 0' fill='none' stroke='%23000' stroke-width='1.2'/%3E%3C/svg%3E\") 0 0/24px 8px repeat-x}.ds-row:hover .ds-row-t,.ds-row:focus-visible .ds-row-t{color:var(--rust)}.ds-row:hover .ds-row-lead::before{opacity:0}.ds-row:hover .ds-row-lead::after{opacity:1;animation:ds-ripple .9s linear infinite}@keyframes ds-ripple{to{-webkit-mask-position:24px 0;mask-position:24px 0}}"
+    },
+    {
+      "name": "Mark",
+      "kind": "custom",
+      "refersTo": "mark",
+      "description": "Date-column row for likes and notes.",
+      "html": "<div class=\"ds-mark\"><span class=\"ds-mark-d\">Nov 22, 2026</span><p class=\"ds-mark-b\"><i>Likes <a href=\"#\">The Wind Filling In</a> by Klaus Harris.</i></p></div>",
+      "css": ".ds-mark{--paper:#faf8f4;--wash:#efe9dd;--ink:#23201b;--muted:#6e675b;--rule:#e3ddd1;--rust:#c0451d;--sage:#5d7052;display:grid;grid-template-columns:6rem 1fr;gap:0 1.5rem;align-items:baseline;padding:.85rem 0;border-bottom:1px solid var(--rule);color:var(--ink)}.ds-mark-d{font:.8125rem -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif;color:var(--muted)}.ds-mark-b{margin:0;font:400 1.15rem/1.5 \"ET Book\",\"Iowan Old Style\",Palatino,Georgia,serif}.ds-mark-b a{color:var(--rust);text-decoration-thickness:1px;text-underline-offset:.18em}.ds-mark-b a:hover{text-decoration-style:wavy;text-decoration-color:var(--sage)}"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Vertical sidebar navigation.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\">About</a><a href=\"#\" aria-current=\"page\">Blog</a><a href=\"#\">Likes</a></nav>",
+      "css": ".ds-nav{--paper:#faf8f4;--wash:#efe9dd;--ink:#23201b;--muted:#6e675b;--rule:#e3ddd1;--rust:#c0451d;--sage:#5d7052;display:flex;flex-direction:column;font:.9375rem/1.4 -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif}.ds-nav a{color:var(--ink);text-decoration:none;padding:.2rem 0;transition:color .2s}.ds-nav a:hover,.ds-nav a[aria-current]{color:var(--rust)}.ds-nav a:focus-visible{outline:2px solid var(--rust);outline-offset:3px}"
+    },
+    {
+      "name": "Button",
+      "kind": "button",
+      "refersTo": "button",
+      "description": "The only button: ink on paper.",
+      "html": "<button class=\"ds-btn\">Post Comment</button>",
+      "css": ".ds-btn{--paper:#faf8f4;--wash:#efe9dd;--ink:#23201b;--muted:#6e675b;--rule:#e3ddd1;--rust:#c0451d;--sage:#5d7052;font:.875rem -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif;color:var(--paper);background:var(--ink);border:0;border-radius:4px;padding:.55rem 1rem;cursor:pointer}.ds-btn:focus-visible{outline:2px solid var(--rust);outline-offset:3px}"
+    },
+    {
+      "name": "Text field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Search and comment fields.",
+      "html": "<input class=\"ds-input\" placeholder=\"Search\">",
+      "css": ".ds-input{--paper:#faf8f4;--wash:#efe9dd;--ink:#23201b;--muted:#6e675b;--rule:#e3ddd1;--rust:#c0451d;--sage:#5d7052;font:.9375rem -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--paper);border:1px solid var(--rule);border-radius:4px;padding:.5rem .7rem;caret-color:var(--rust)}.ds-input::placeholder{color:var(--muted)}.ds-input:focus-visible{outline:2px solid var(--rust);outline-offset:3px}"
+    },
+    {
+      "name": "Month label",
+      "kind": "custom",
+      "refersTo": "month-label",
+      "description": "Small uppercase label grouping rows by month.",
+      "html": "<h3 class=\"ds-month\">November 2026</h3>",
+      "css": ".ds-month{--paper:#faf8f4;--wash:#efe9dd;--ink:#23201b;--muted:#6e675b;--rule:#e3ddd1;--rust:#c0451d;--sage:#5d7052;font:500 .8125rem/1 -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:1.75rem 0 .4rem}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Field Notebook",
+    "overview": "**Creative North Star: \"The Field Notebook\"**\n\nThis is one person's notebook, kept in good order: a single reading column of ET Book on warm paper, with a narrow margin on the left for the name and the way around. It shares its paper, ink and rust with the digital garden at notes.cagrimmett.com so the two read as volumes of the same set. Everything that is prose is set in the serif; everything that is bookkeeping (dates, categories, navigation, pagination) is set small in the system sans and kept out of the way.\n\nThe page is flat and quiet at rest. Personality comes from a handful of small hover responses that reward attention without asking for it: the leader between a title and its date ripples like a fishing line, the logo tips, the asterisk turns, a link's underline goes wavy. Nothing moves on its own.\n\nLight and dark are the same notebook under different light. The scheme follows the reader's system setting; there is no toggle.",
+    "keyCharacteristics": [
+      "One 40rem reading column beside an 11rem sidebar; no cards, no grids of tiles.",
+      "Serif for reading, system sans for metadata.",
+      "Rust is the only accent for links and state. Sage appears only inside hover effects.",
+      "Hairline rules and whitespace separate things. No shadows.",
+      "Lists are one line per item, grouped under small uppercase time labels."
+    ],
+    "rules": [
+      {
+        "name": "The One Accent Rule",
+        "body": "Rust is the only colour that means something. If a second colour seems needed for meaning, the answer is weight, size or position.",
+        "section": "colors"
+      },
+      {
+        "name": "The Preset Swap Rule",
+        "body": "Dark mode is implemented by redefining the `--wp--preset--color--*` variables under `prefers-color-scheme: dark`, so every block and every `has-*-color` class follows. Never hard-code a hex in a rule; use the tokens.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Voices Rule",
+        "body": "If a person wrote it, it is serif. If the system generated it (a date, a count, a category, a page number), it is sans and muted.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Meta Size Rule",
+        "body": "All small metadata is 0.8125rem. Do not introduce 0.75rem or 0.875rem neighbours.",
+        "section": "typography"
+      },
+      {
+        "name": "The No Shadow Rule",
+        "body": "If something seems to need lifting off the page, give it a rule or more space instead.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do set anything a person wrote in ET Book and anything the system generated in the muted system sans.",
+      "Do use the colour tokens so dark mode follows automatically.",
+      "Do list things one per line under time labels before reaching for any other layout.",
+      "Do keep motion as a response to hover or focus, and disable it for reduced motion.",
+      "Do separate with hairlines and space."
+    ],
+    "donts": [
+      "Don't use bold for headings; step the size instead.",
+      "Don't add a second accent colour, or use sage outside hover effects.",
+      "Don't add shadows, cards, gradients or background fills other than the footer wash.",
+      "Don't add entrance animations or anything that moves without being touched.",
+      "Don't add a fifth hover touch without removing one.",
+      "Don't let content break out of the 40rem column."
+    ]
+  }
+}
