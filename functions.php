@@ -19,7 +19,7 @@ add_action( 'pre_get_posts', function ( $query ) {
 	if ( is_admin() || ! $query->is_main_query() || $query->is_feed() ) {
 		return;
 	}
-	if ( $query->is_home() || $query->is_archive() || $query->is_search() ) {
+	if ( $query->is_archive() || $query->is_search() ) {
 		// Likes and notes show their content, so they get shorter pages than title lists.
 		$query->set( 'posts_per_page', $query->is_post_type_archive( array( 'indieblocks_like', 'indieblocks_note' ) ) ? 30 : 60 );
 	}
@@ -28,7 +28,8 @@ add_action( 'pre_get_posts', function ( $query ) {
 /**
  * [cg_post_index] lists posts one per line, grouped by month.
  *
- * With count="N" it runs its own query for the latest N posts (homepage).
+ * With count="N" it runs its own query for the latest N posts (homepage);
+ * count="all" lists every post (the blog index page).
  * Without it, it renders the main query and its pagination (blog, archives, search).
  * heading="3" sets the month heading level.
  */
@@ -36,7 +37,7 @@ add_shortcode( 'cg_post_index', function ( $atts ) {
 	global $wp_query;
 
 	$atts  = shortcode_atts( array( 'count' => 0, 'heading' => 2 ), $atts );
-	$count = absint( $atts['count'] );
+	$count = 'all' === $atts['count'] ? -1 : absint( $atts['count'] );
 	$tag   = 'h' . min( 6, max( 2, absint( $atts['heading'] ) ) );
 	$query = $count
 		? new WP_Query( array( 'post_type' => 'post', 'posts_per_page' => $count, 'ignore_sticky_posts' => true, 'no_found_rows' => true ) )

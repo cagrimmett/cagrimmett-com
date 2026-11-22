@@ -491,6 +491,40 @@ h3 {
 	text-decoration: underline;
 }
 
+/* === blog: full posts, one after another === */
+.cg-stream .wp-block-post-template {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.cg-stream .wp-block-post-template > li {
+	margin: 0;
+	padding-block: 0 4rem;
+}
+
+.cg-stream .wp-block-post-template > li + li {
+	border-top: 1px solid var(--rule);
+	padding-top: 3rem;
+}
+
+.cg-stream .wp-block-post-title {
+	margin: 0;
+}
+
+.cg-stream .wp-block-post-title a {
+	color: var(--ink);
+	text-decoration: none;
+}
+
+.cg-stream .wp-block-post-title a:hover {
+	color: var(--rust);
+}
+
+.cg-stream .cg-meta {
+	margin-block: 0.4rem 1.25rem;
+}
+
 /* === pagination === */
 .cg-pagination,
 .wp-block-query-pagination,
