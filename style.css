@@ -590,7 +590,8 @@ h3 {
 }
 
 .cg-pagination .nav-links > :first-child,
-.wp-block-query-pagination > :first-child {
+.wp-block-query-pagination > :first-child,
+.wp-block-query-pagination-numbers > :first-child {
 	padding-left: 0;
 }
 
