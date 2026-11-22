@@ -527,6 +527,16 @@ h3 {
 }
 
 /* === blog: full posts, one after another === */
+/* The page title has to outrank the post titles beneath it. */
+.blog .cg-head {
+	margin-block-end: 3rem;
+}
+
+.blog .cg-head h1 {
+	font-size: var(--wp--preset--font-size--xx-large);
+	line-height: 1.1;
+}
+
 .cg-stream .wp-block-post-template {
 	list-style: none;
 	margin: 0;
