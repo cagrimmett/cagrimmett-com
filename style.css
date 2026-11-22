@@ -1,0 +1,785 @@
+/*
+Theme Name: cagrimmett-2026
+Author: Chuck Grimmett
+Author URI: https://cagrimmett.com
+Description: Chuck Grimmett's personal site. ET Book, paper and rust, light and dark, a sibling to the digital garden.
+Requires at least: 6.6
+Tested up to: 6.9
+Requires PHP: 7.4
+Version: 0.1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: cagrimmett-2026
+*/
+
+:root {
+	color-scheme: light;
+	--paper: var(--wp--preset--color--base);
+	--wash: var(--wp--preset--color--base-2);
+	--ink: var(--wp--preset--color--contrast);
+	--muted: var(--wp--preset--color--contrast-2);
+	--rule: var(--wp--preset--color--contrast-3);
+	--rust: var(--wp--preset--color--accent-3);
+	--sage: var(--wp--preset--color--accent-4);
+	--ui: var(--wp--preset--font-family--ui);
+	--ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* === dark scheme: same tokens, swapped at the preset level so blocks follow === */
+@media (prefers-color-scheme: dark) {
+	:root {
+		color-scheme: dark;
+		--wp--preset--color--base: #171512;
+		--wp--preset--color--base-2: #221f19;
+		--wp--preset--color--contrast: #e9e3d6;
+		--wp--preset--color--contrast-2: #9c9384;
+		--wp--preset--color--contrast-3: #322e26;
+		--wp--preset--color--accent-3: #f08a63;
+		--wp--preset--color--accent-4: #8fa383;
+	}
+
+	.cg-main img:not([src$=".svg"]) {
+		filter: brightness(0.92) contrast(1.02);
+	}
+
+	/* The nav's search icon is a dark PNG. */
+	.cg-side .wp-block-navigation img {
+		filter: invert(0.9);
+	}
+}
+
+/* === base === */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	scrollbar-color: var(--rule) var(--paper);
+	accent-color: var(--rust);
+}
+
+body {
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+img,
+video {
+	max-width: 100%;
+	height: auto;
+}
+
+::selection {
+	background-color: var(--rust);
+	color: var(--paper);
+}
+
+a {
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.18em;
+}
+
+:where(a, button, input, textarea, summary):focus-visible {
+	outline: 2px solid var(--rust);
+	outline-offset: 3px;
+	border-radius: 2px;
+}
+
+h1,
+h2,
+h3 {
+	text-wrap: balance;
+}
+
+.wp-site-blocks > * + * {
+	margin-block-start: 0;
+}
+
+/* === shell: sidebar beside one reading column === */
+.cg-shell {
+	display: grid;
+	grid-template-columns: 11rem minmax(0, 40rem);
+	gap: 0 4rem;
+	max-width: 62rem;
+	margin: 0 auto;
+	padding: 3rem 1.5rem 6rem;
+}
+
+.cg-shell > * {
+	margin-block-start: 0;
+}
+
+.cg-main > * + * {
+	margin-block-start: 1.1rem;
+}
+
+/* More room above a heading than below it. */
+.cg-main :where(.wp-block-post-content, .entry-content) :where(h2, h3, h4) {
+	margin-block-start: 2.2rem;
+	margin-block-end: 0.5rem;
+}
+
+/* === sidebar === */
+.cg-side {
+	align-self: start;
+	position: sticky;
+	top: 3rem;
+	font-family: var(--ui);
+	font-size: 0.9375rem;
+	line-height: 1.4;
+}
+
+.cg-side > * + * {
+	margin-block-start: 0;
+}
+
+.cg-side .wp-block-site-logo {
+	margin: 0;
+}
+
+.cg-side .wp-block-site-logo img {
+	display: block;
+	border-radius: 6px;
+	transition: transform 0.5s var(--ease);
+}
+
+/* Whimsy: the logo tips its hat. */
+.cg-side .wp-block-site-logo a:hover img,
+.cg-side .wp-block-site-logo a:focus-visible img {
+	transform: rotate(-8deg) scale(1.06);
+}
+
+.cg-side .wp-block-site-title {
+	font-family: var(--wp--preset--font-family--body);
+	font-size: 1.35rem;
+	font-weight: 400;
+	line-height: 1.2;
+	margin: 0.75rem 0 1rem;
+}
+
+.cg-side .wp-block-site-title a {
+	color: var(--ink);
+	text-decoration: none;
+}
+
+.cg-side .wp-block-navigation,
+.cg-side .wp-block-navigation__container {
+	gap: 0;
+	font-size: inherit;
+}
+
+.cg-side .wp-block-navigation .wp-block-navigation-item__content {
+	color: var(--ink);
+	padding: 0.2rem 0;
+	text-decoration: none;
+	transition: color 0.2s;
+}
+
+.cg-side .wp-block-navigation .wp-block-navigation-item__content:hover,
+.cg-side .wp-block-navigation .current-menu-item > .wp-block-navigation-item__content {
+	color: var(--rust);
+}
+
+.cg-side .wp-block-navigation img {
+	display: block;
+	width: 18px !important;
+	margin-top: 0.3rem;
+	opacity: 0.75;
+}
+
+.wp-block-navigation .is-style-arrow-link .wp-block-navigation-item__label::after {
+	content: "\2197";
+	display: inline-block;
+	margin-left: 0.3em;
+	font-size: 0.85em;
+	transition: transform 0.3s var(--ease);
+}
+
+.wp-block-navigation .is-style-arrow-link a:hover .wp-block-navigation-item__label::after {
+	transform: translate(2px, -2px);
+}
+
+/* === page heads === */
+.cg-head {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	gap: 1rem;
+	margin-block-end: 1rem;
+}
+
+.cg-head > * {
+	margin: 0;
+}
+
+.cg-head p,
+.cg-meta,
+.cg-meta a {
+	font-family: var(--ui);
+	font-size: 0.8125rem;
+	color: var(--muted);
+}
+
+.cg-head p a {
+	color: var(--rust);
+}
+
+.cg-meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.25rem 0.9rem;
+	align-items: baseline;
+	margin-block: 0.5rem 2rem;
+	font-variant-numeric: tabular-nums;
+}
+
+.cg-meta > * {
+	margin: 0;
+}
+
+.cg-meta a {
+	text-decoration: none;
+}
+
+.cg-meta a:hover {
+	color: var(--rust);
+	text-decoration: underline;
+}
+
+.cg-section {
+	margin-block-start: 4.5rem;
+}
+
+/* === homepage greeting. Whimsy: the asterisk turns. === */
+.cg-hello::before {
+	content: "";
+	display: inline-block;
+	width: 0.62em;
+	height: 0.62em;
+	margin-right: 0.22em;
+	background-color: var(--rust);
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2v20M2 12h20M4.9 4.9l14.2 14.2M19.1 4.9 4.9 19.1' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2v20M2 12h20M4.9 4.9l14.2 14.2M19.1 4.9 4.9 19.1' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+	transition: transform 0.9s var(--ease);
+}
+
+.cg-hello:hover::before {
+	transform: rotate(180deg);
+}
+
+/* === post index: one line per post, grouped by month ===
+   Whimsy: the leader between title and date is a fishing leader; on hover a
+   ripple runs down the line. */
+.cg-month {
+	font-family: var(--ui);
+	font-size: 0.75rem;
+	font-weight: 500;
+	line-height: 1;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--muted);
+	margin: 1.75rem 0 0.4rem;
+}
+
+.cg-posts {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.cg-posts a {
+	display: flex;
+	align-items: baseline;
+	gap: 0.75rem;
+	padding: 0.32rem 0;
+	color: var(--ink);
+	text-decoration: none;
+}
+
+.cg-t {
+	transition: color 0.2s;
+}
+
+.cg-cat,
+.cg-d {
+	font-family: var(--ui);
+	color: var(--muted);
+	white-space: nowrap;
+}
+
+.cg-cat {
+	font-size: 0.75rem;
+}
+
+.cg-d {
+	font-size: 0.8125rem;
+	font-variant-numeric: tabular-nums;
+	min-width: 3.1rem;
+	text-align: right;
+}
+
+.cg-lead {
+	flex: 1;
+	min-width: 2rem;
+	height: 8px;
+	position: relative;
+	align-self: center;
+}
+
+.cg-lead::before,
+.cg-lead::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	transition: opacity 0.25s;
+}
+
+.cg-lead::before {
+	top: 50%;
+	height: 0;
+	border-top: 1px dotted var(--muted);
+	opacity: 0.6;
+}
+
+.cg-lead::after {
+	opacity: 0;
+	background-color: var(--sage);
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='8'%3E%3Cpath d='M0 4q6-5 12 0t12 0' fill='none' stroke='%23000' stroke-width='1.2'/%3E%3C/svg%3E") 0 0 / 24px 8px repeat-x;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='8'%3E%3Cpath d='M0 4q6-5 12 0t12 0' fill='none' stroke='%23000' stroke-width='1.2'/%3E%3C/svg%3E") 0 0 / 24px 8px repeat-x;
+}
+
+.cg-posts a:hover .cg-t,
+.cg-posts a:focus-visible .cg-t {
+	color: var(--rust);
+}
+
+.cg-posts a:hover .cg-lead::before,
+.cg-posts a:focus-visible .cg-lead::before {
+	opacity: 0;
+}
+
+.cg-posts a:hover .cg-lead::after,
+.cg-posts a:focus-visible .cg-lead::after {
+	opacity: 1;
+	animation: cg-ripple 0.9s linear infinite;
+}
+
+@keyframes cg-ripple {
+	to {
+		-webkit-mask-position: 24px 0;
+		mask-position: 24px 0;
+	}
+}
+
+/* === likes and notes: the garden's bookmark shape === */
+.cg-marks .wp-block-post-template {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.cg-marks .wp-block-post-template > li {
+	margin: 0;
+}
+
+.cg-mark {
+	display: grid;
+	grid-template-columns: 6rem minmax(0, 1fr);
+	gap: 0 1.5rem;
+	align-items: baseline;
+	padding: 0.85rem 0;
+	border-bottom: 1px solid var(--rule);
+}
+
+.cg-mark > *,
+.cg-mark__main > * {
+	margin-block-start: 0;
+}
+
+.cg-mark__date,
+.cg-mark__date a {
+	font-family: var(--ui);
+	font-size: 0.75rem;
+	color: var(--muted);
+	text-decoration: none;
+	font-variant-numeric: tabular-nums;
+}
+
+.cg-mark__date a:hover {
+	color: var(--rust);
+	text-decoration: underline;
+}
+
+.cg-mark__main {
+	display: grid;
+	gap: 0.4rem;
+	min-width: 0;
+}
+
+.cg-mark__body {
+	font-size: 0.92em;
+	min-width: 0;
+	overflow-wrap: anywhere;
+}
+
+.cg-mark__body * {
+	margin-block: 0;
+}
+
+.cg-mark__body * + :where(p, figure, div, ul, ol, blockquote) {
+	margin-block-start: 0.35rem;
+}
+
+.cg-mark__body img {
+	border-radius: 4px;
+	margin-block: 0.35rem;
+	max-height: 24rem;
+	width: auto;
+}
+
+.cg-mark__tags,
+.cg-mark__tags a {
+	font-family: var(--ui);
+	font-size: 0.75rem;
+	color: var(--muted);
+	text-decoration: none;
+}
+
+.cg-mark__tags a:hover {
+	color: var(--rust);
+	text-decoration: underline;
+}
+
+/* Whimsy: links in the stream and the greeting go wavy on hover. */
+.cg-mark__body a,
+.cg-hello + p a {
+	transition: text-decoration-color 0.2s;
+}
+
+.cg-mark__body a:hover,
+.cg-hello + p a:hover {
+	text-decoration-style: wavy;
+	text-decoration-color: var(--sage);
+}
+
+.wp-block-indieblocks-link-preview {
+	border: 1px solid var(--rule);
+	border-radius: 5px;
+	padding: 0.6rem 0.75rem;
+	max-width: 30rem;
+	overflow-wrap: anywhere;
+}
+
+.wp-block-indieblocks-link-preview a {
+	text-decoration: none;
+}
+
+.wp-block-indieblocks-link-preview .indieblocks-card-thumbnail {
+	background-color: var(--wash);
+	border-radius: 3px;
+	overflow: hidden;
+}
+
+.wp-block-indieblocks-link-preview .indieblocks-card-body small {
+	font-family: var(--ui);
+	color: var(--muted);
+}
+
+.wp-block-indieblocks-link-preview a:hover {
+	text-decoration: underline;
+}
+
+/* === pagination === */
+.cg-pagination,
+.wp-block-query-pagination,
+.wp-block-comments-pagination,
+.cg-postnav {
+	font-family: var(--ui);
+	font-size: 0.8125rem;
+	margin-block-start: 2.5rem;
+}
+
+.cg-pagination .nav-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.25rem 0.9rem;
+}
+
+.cg-pagination a,
+.wp-block-query-pagination a,
+.cg-postnav a {
+	color: var(--muted);
+	text-decoration: none;
+}
+
+.cg-pagination a:hover,
+.wp-block-query-pagination a:hover,
+.cg-postnav a:hover {
+	color: var(--rust);
+	text-decoration: underline;
+}
+
+.cg-pagination .current,
+.wp-block-query-pagination .current {
+	color: var(--rust);
+}
+
+.cg-postnav {
+	display: flex;
+	justify-content: space-between;
+	gap: 2rem;
+	border-top: 1px solid var(--rule);
+	padding-top: 1.25rem;
+	color: var(--muted);
+}
+
+/* === single posts === */
+.cg-terms {
+	font-family: var(--ui);
+	font-size: 0.8125rem;
+	color: var(--muted);
+}
+
+.cg-after {
+	margin-block-start: 3.5rem;
+	border-top: 1px solid var(--rule);
+	padding-top: 1.5rem;
+}
+
+.cg-after .wp-block-post-author {
+	gap: 0.25rem;
+}
+
+.cg-after .wp-block-post-author__avatar img {
+	border-radius: 6px;
+}
+
+.cg-after .wp-block-post-author__bio,
+.wp-block-comment-date,
+.wp-block-comment-date a,
+.wp-block-comment-reply-link,
+.wp-block-comment-edit-link {
+	font-family: var(--ui);
+	font-size: 0.8125rem;
+	color: var(--muted);
+}
+
+.wp-block-comment-content {
+	font-size: 0.92em;
+}
+
+blockquote.is-style-plain {
+	border-left: 1px solid var(--muted);
+}
+
+.wp-block-quote {
+	border-left: 1px solid var(--muted);
+	margin-inline: 0;
+}
+
+/* === forms === */
+:where(input:not([type="submit"], [type="checkbox"], [type="radio"]), textarea) {
+	font: inherit;
+	font-family: var(--ui);
+	font-size: 0.9375rem;
+	color: var(--ink);
+	background-color: var(--paper);
+	border: 1px solid var(--rule);
+	border-radius: 4px;
+	padding: 0.5rem 0.7rem;
+	caret-color: var(--rust);
+	max-width: 100%;
+}
+
+:where(input, textarea):focus {
+	border-color: var(--muted);
+}
+
+::placeholder {
+	color: var(--muted);
+	opacity: 1;
+}
+
+.wp-block-search__input {
+	border: 1px solid var(--rule);
+}
+
+.comment-form-comment {
+	display: grid;
+}
+
+.comment-form label {
+	font-family: var(--ui);
+	font-size: 0.8125rem;
+	color: var(--muted);
+}
+
+input#webmention-source {
+	width: 100%;
+}
+
+input[type="submit"] {
+	font-family: var(--ui);
+	font-size: 0.875rem;
+	color: var(--paper);
+	background-color: var(--ink);
+	border: 0;
+	border-radius: 4px;
+	padding: 0.55rem 1rem;
+	cursor: pointer;
+}
+
+/* === footer === */
+.cg-footer {
+	border-top: 1px solid var(--rule);
+	background-color: var(--wash);
+	padding: 2.5rem 1.5rem 3rem;
+}
+
+.cg-footer__inner {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem 4rem;
+	align-items: flex-start;
+	max-width: 59rem;
+	margin: 0 auto;
+	font-family: var(--ui);
+	font-size: 0.8125rem;
+}
+
+.cg-footer__inner > * {
+	margin: 0;
+}
+
+.cg-footer .wp-block-navigation {
+	--wp--style--block-gap: 0.3rem;
+	font-size: inherit;
+}
+
+.cg-footer .wp-block-navigation .wp-block-navigation-item__content {
+	color: var(--muted);
+}
+
+.cg-footer .wp-block-navigation .wp-block-navigation-item__content:hover {
+	color: var(--rust);
+	text-decoration: underline;
+}
+
+.cg-footer .wp-block-search {
+	margin-left: auto;
+	min-width: 12rem;
+}
+
+/* === carried over from the old site's Additional CSS === */
+.wp-block-archives-list {
+	list-style: none;
+	padding-left: 0;
+}
+
+.micropub-img {
+	max-width: 100%;
+}
+
+#reading-list .year {
+	margin-bottom: 5rem;
+}
+
+#reading-list .count {
+	font-family: var(--ui);
+	font-size: 0.75rem;
+	color: var(--muted);
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	margin-top: -0.9rem;
+	margin-bottom: 1.5rem;
+}
+
+#reading-list .star {
+	color: var(--rust);
+	padding-left: 3px;
+}
+
+#reading-list a {
+	color: var(--ink);
+}
+
+#reading-list .author,
+#reading-list .pub-year {
+	font-size: 0.9em;
+	color: var(--muted);
+	padding-left: 3px;
+}
+
+.wp-block-rss__item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 5px 0;
+}
+
+.wp-block-rss__item-title {
+	font-size: smaller;
+}
+
+.wp-block-rss__item-publish-date {
+	font-family: var(--ui);
+	font-size: 0.75rem;
+	color: var(--muted);
+	min-width: 65px;
+}
+
+.postid-23467 .wp-block-post-featured-image {
+	display: none;
+}
+
+/* === small screens === */
+@media (max-width: 720px) {
+	.cg-shell {
+		grid-template-columns: minmax(0, 1fr);
+		padding-top: 1.75rem;
+	}
+
+	.cg-side {
+		position: static;
+		margin-bottom: 2.5rem;
+	}
+
+	.cg-side .wp-block-navigation__container {
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 0.1rem 1rem;
+		align-items: center;
+	}
+
+	/* A wrapped title beside a stub of leader reads as a glitch: drop it. */
+	.cg-lead,
+	.cg-cat {
+		display: none;
+	}
+
+	.cg-t {
+		flex: 1;
+	}
+
+	.cg-footer .wp-block-search {
+		margin-left: 0;
+	}
+}
+
+@media (max-width: 520px) {
+	.cg-mark {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 0.15rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation: none !important;
+		transition: none !important;
+	}
+}

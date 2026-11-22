@@ -1,0 +1,35 @@
+<!-- wp:group {"className":"cg-shell","layout":{"type":"default"}} -->
+<div class="wp-block-group cg-shell"><!-- wp:template-part {"slug":"sidebar","tagName":"header","className":"cg-side"} /-->
+
+<!-- wp:group {"tagName":"main","className":"cg-main","layout":{"type":"default"}} -->
+<main class="wp-block-group cg-main"><!-- wp:post-title {"level":1} /-->
+
+<!-- wp:group {"className":"cg-meta","layout":{"type":"default"}} -->
+<div class="wp-block-group cg-meta"><!-- wp:post-date {"format":"M j, Y","isLink":true} /-->
+
+<!-- wp:post-terms {"term":"category"} /--></div>
+<!-- /wp:group -->
+
+<!-- wp:post-featured-image /-->
+
+<!-- wp:post-content {"metadata":{"ignoredHookedBlocks":["activitypub/reactions"]},"layout":{"type":"default"}} /-->
+
+<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"this-week-in/posts"}}},"style":{"typography":{"fontStyle":"italic","fontWeight":"400"}}} -->
+<p style="font-style:italic;font-weight:400"></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:post-terms {"term":"post_tag","className":"cg-terms","prefix":"Tagged "} /-->
+
+<!-- wp:jetpack/like /-->
+
+<!-- wp:template-part {"slug":"comments"} /-->
+
+<!-- wp:group {"tagName":"nav","className":"cg-postnav","layout":{"type":"default"},"ariaLabel":"Posts"} -->
+<nav aria-label="Posts" class="wp-block-group cg-postnav"><!-- wp:post-navigation-link {"type":"previous","showTitle":true,"linkLabel":true,"arrow":"arrow"} /-->
+
+<!-- wp:post-navigation-link {"showTitle":true,"linkLabel":true,"arrow":"arrow"} /--></nav>
+<!-- /wp:group --></main>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer","className":"cg-footer"} /-->
