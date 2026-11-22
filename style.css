@@ -6,7 +6,7 @@ Description: Chuck Grimmett's personal site. ET Book, paper and rust, light and 
 Requires at least: 6.6
 Tested up to: 6.9
 Requires PHP: 7.4
-Version: 0.1.0
+Version: 0.1.1
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: cagrimmett-com
@@ -70,6 +70,11 @@ img,
 video {
 	max-width: 100%;
 	height: auto;
+}
+
+/* Hairline so light images keep an edge against the paper. */
+.wp-block-post-content img:not(.emoji, .wp-smiley, [src$=".svg"]) {
+	border: 1px solid var(--rule);
 }
 
 ::selection {
