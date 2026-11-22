@@ -1,6 +1,6 @@
 <?php
 /**
- * cagrimmett-2026: styles, a month-grouped post index, and longer list pages.
+ * cagrimmett-com: styles, a month-grouped post index, and longer list pages.
  */
 
 add_action( 'after_setup_theme', function () {
@@ -9,7 +9,7 @@ add_action( 'after_setup_theme', function () {
 
 add_action( 'wp_enqueue_scripts', function () {
 	// After global styles so the dark-scheme token overrides win.
-	wp_enqueue_style( 'cagrimmett-2026', get_stylesheet_uri(), array( 'global-styles' ), wp_get_theme()->get( 'Version' ) );
+	wp_enqueue_style( 'cagrimmett-com', get_stylesheet_uri(), array( 'global-styles' ), wp_get_theme()->get( 'Version' ) );
 } );
 
 /**
@@ -72,7 +72,7 @@ add_shortcode( 'cg_post_index', function ( $atts ) {
 		$out  .= sprintf(
 			'<li><a href="%s"><span class="cg-t">%s</span><span class="cg-lead" aria-hidden="true"></span>%s<time class="cg-d" datetime="%s">%s</time></a></li>',
 			esc_url( get_permalink() ),
-			'' !== $title ? $title : esc_html__( '(untitled)', 'cagrimmett-2026' ),
+			'' !== $title ? $title : esc_html__( '(untitled)', 'cagrimmett-com' ),
 			$cats ? '<span class="cg-cat">' . esc_html( $cats[0]->name ) . '</span>' : '',
 			esc_attr( get_the_date( 'c' ) ),
 			esc_html( get_the_date( 'M j' ) )

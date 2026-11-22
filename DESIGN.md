@@ -1,5 +1,5 @@
 ---
-name: cagrimmett-2026
+name: cagrimmett-com
 description: Chuck Grimmett's personal site. A quiet reading column in ET Book, paper and rust, sibling to the digital garden.
 colors:
   paper: "#faf8f4"
@@ -92,7 +92,7 @@ components:
     typography: "{typography.label}"
 ---
 
-# Design System: cagrimmett-2026
+# Design System: cagrimmett-com
 
 ## Overview
 
