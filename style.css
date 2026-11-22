@@ -568,14 +568,30 @@ h3 {
 .wp-block-comments-pagination,
 .cg-postnav {
 	font-family: var(--ui);
-	font-size: 0.8125rem;
-	margin-block-start: 2.5rem;
+	font-size: 1.0625rem;
+	font-variant-numeric: tabular-nums;
+	margin-block-start: 3rem;
 }
 
-.cg-pagination .nav-links {
+.cg-pagination .nav-links,
+.wp-block-query-pagination-numbers {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0.25rem 0.9rem;
+	align-items: baseline;
+	gap: 0.25rem 0.5rem;
+}
+
+/* Roomy targets: page numbers are small words, so pad them out. */
+.cg-pagination .page-numbers,
+.wp-block-query-pagination .page-numbers,
+.wp-block-query-pagination-previous,
+.wp-block-query-pagination-next {
+	padding: 0.4rem 0.5rem;
+}
+
+.cg-pagination .nav-links > :first-child,
+.wp-block-query-pagination > :first-child {
+	padding-left: 0;
 }
 
 .cg-pagination a,
@@ -595,6 +611,7 @@ h3 {
 .cg-pagination .current,
 .wp-block-query-pagination .current {
 	color: var(--rust);
+	font-weight: 600;
 }
 
 .cg-postnav {
