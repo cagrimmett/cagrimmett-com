@@ -29,7 +29,7 @@ add_action( 'pre_get_posts', function ( $query ) {
  * [cg_post_index] lists posts one per line, grouped by month.
  *
  * With count="N" it runs its own query for the latest N posts (homepage);
- * count="all" lists every post (the blog index page).
+ * count="all" lists every post under year headings, with a jump list of years on top (the blog index page).
  * Without it, it renders the main query and its pagination (blog, archives, search).
  * heading="3" sets the month heading level.
  */
@@ -47,6 +47,9 @@ add_shortcode( 'cg_post_index', function ( $atts ) {
 		return '<p>Nothing here yet.</p>';
 	}
 
+	$all   = -1 === $count;
+	$mtag  = $all ? 'h' . min( 6, (int) substr( $tag, 1 ) + 1 ) : $tag;
+	$years = array();
 	$month = '';
 	$out   = '';
 	while ( $query->have_posts() ) {
@@ -54,7 +57,13 @@ add_shortcode( 'cg_post_index', function ( $atts ) {
 
 		$this_month = get_the_date( 'F Y' );
 		if ( $this_month !== $month ) {
-			$out  .= ( $month ? '</ul>' : '' ) . sprintf( '<%1$s class="cg-month">%2$s</%1$s><ul class="cg-posts">', $tag, esc_html( $this_month ) );
+			$out .= $month ? '</ul>' : '';
+			$year = get_the_date( 'Y' );
+			if ( $all && ! in_array( $year, $years, true ) ) {
+				$years[] = $year;
+				$out    .= sprintf( '<%1$s class="cg-year" id="y%2$s">%2$s</%1$s>', $tag, esc_html( $year ) );
+			}
+			$out  .= sprintf( '<%1$s class="cg-month">%2$s</%1$s><ul class="cg-posts">', $mtag, esc_html( $all ? get_the_date( 'F' ) : $this_month ) );
 			$month = $this_month;
 		}
 
@@ -70,6 +79,14 @@ add_shortcode( 'cg_post_index', function ( $atts ) {
 		);
 	}
 	$out .= '</ul>';
+
+	if ( $all ) {
+		$toc = '';
+		foreach ( $years as $year ) {
+			$toc .= sprintf( '<li><a href="#y%1$s">%1$s</a></li>', esc_html( $year ) );
+		}
+		$out = '<nav class="cg-years" aria-label="Jump to year"><ul>' . $toc . '</ul></nav>' . $out;
+	}
 
 	if ( $count ) {
 		wp_reset_postdata();

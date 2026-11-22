@@ -56,6 +56,7 @@ Text Domain: cagrimmett-2026
 }
 
 html {
+	scroll-behavior: smooth;
 	scrollbar-color: var(--rule) var(--paper);
 	accent-color: var(--rust);
 }
@@ -283,6 +284,40 @@ h3 {
 	margin: 1.75rem 0 0.4rem;
 }
 
+/* Blog index: jump list of years, then a heading per year. */
+.cg-years ul {
+	list-style: none;
+	margin: 0 0 1rem;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.15rem 1rem;
+	font-family: var(--ui);
+	font-size: 0.8125rem;
+	font-variant-numeric: tabular-nums;
+}
+
+.cg-years a {
+	color: var(--muted);
+	text-decoration: none;
+}
+
+.cg-years a:hover {
+	color: var(--rust);
+	text-decoration: underline;
+}
+
+.cg-year {
+	margin: 4rem 0 0;
+	padding-top: 1rem;
+	border-top: 1px solid var(--rule);
+	scroll-margin-top: 1.5rem;
+}
+
+.cg-years + .cg-year {
+	margin-top: 2rem;
+}
+
 .cg-posts {
 	list-style: none;
 	margin: 0;
@@ -500,16 +535,18 @@ h3 {
 
 .cg-stream .wp-block-post-template > li {
 	margin: 0;
-	padding-block: 0 4rem;
+	padding-block: 0 8rem;
 }
 
 .cg-stream .wp-block-post-template > li + li {
 	border-top: 1px solid var(--rule);
-	padding-top: 3rem;
+	padding-top: 5rem;
 }
 
 .cg-stream .wp-block-post-title {
 	margin: 0;
+	font-size: var(--wp--preset--font-size--x-large);
+	line-height: 1.15;
 }
 
 .cg-stream .wp-block-post-title a {
