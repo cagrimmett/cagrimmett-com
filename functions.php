@@ -112,12 +112,14 @@ add_filter( 'the_content', function ( $content ) {
 		'~<h2[^>]*>\s*(\d{4})\s*</h2>\s*(?:<p[^>]*>(.*?)</p>\s*)?<ul[^>]*>(.*?)</ul>~s',
 		function ( $m ) use ( &$toc ) {
 			preg_match_all( '~<li[^>]*>(.*?)</li>~s', $m[3], $items );
-			$rows = '';
+			$rows  = '';
+			$stars = 0;
 			foreach ( $items[1] as $li ) {
 				$li   = preg_replace( '~</?a\b[^>]*>~i', '', $li ); // Titles only; links in the list are not shown.
 				$li   = str_replace( array( '&nbsp;', "\xC2\xA0" ), ' ', $li );
 				$star = false !== strpos( $li, '★' );
 				$li   = trim( str_replace( '★', '', $li ) );
+				$stars += (int) $star;
 				$by   = '';
 				$note = '';
 				if ( preg_match( '~^(.*?)\sby\s+(.*?)\s*(?:\((\d{4})\))?(?:\s(?:-|–|&#8211;)\s+(.*))?$~su', $li, $p ) ) {
@@ -136,7 +138,7 @@ add_filter( 'the_content', function ( $content ) {
 			return sprintf(
 				'<section class="cg-reading"><h2 class="cg-year" id="y%1$s">%1$s</h2><p class="cg-count">%2$s</p><ul class="cg-books">%3$s</ul></section>',
 				$m[1],
-				esc_html( $count . ( ! empty( $n ) && '' !== $split ? ' · ' . $split : '' ) ),
+				esc_html( $count . ( ! empty( $n ) && '' !== $split ? ' · ' . $split : '' ) . ( $stars ? ' · ' . $stars . ' starred' : '' ) ),
 				$rows
 			);
 		},
