@@ -19,7 +19,8 @@ add_action( 'pre_get_posts', function ( $query ) {
 	if ( is_admin() || ! $query->is_main_query() || $query->is_feed() ) {
 		return;
 	}
-	if ( $query->is_archive() || $query->is_search() ) {
+	// Category archives show full posts like the blog, so they keep the blog's page size.
+	if ( ( $query->is_archive() && ! $query->is_category() ) || $query->is_search() ) {
 		// Likes and notes show their content, so they get shorter pages than title lists.
 		$query->set( 'posts_per_page', $query->is_post_type_archive( array( 'indieblocks_like', 'indieblocks_note' ) ) ? 30 : 60 );
 	}
