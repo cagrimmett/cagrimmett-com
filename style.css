@@ -6,7 +6,7 @@ Description: Chuck Grimmett's personal site. ET Book, paper and rust, light and 
 Requires at least: 6.6
 Tested up to: 6.9
 Requires PHP: 7.4
-Version: 0.2.0
+Version: 0.2.1
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: cagrimmett-com
@@ -825,7 +825,42 @@ input[type="submit"] {
 }
 
 /* === reading page: books by year === */
-.cg-years + .cg-reading .cg-year {
+.cg-reading-tools {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 0.5rem 1.5rem;
+}
+
+.cg-reading-tools .cg-years ul {
+	margin: 0;
+}
+
+.cg-starred {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	font-family: var(--ui);
+	font-size: 0.8125rem;
+	color: var(--muted);
+	cursor: pointer;
+}
+
+.cg-starred input {
+	margin: 0;
+	accent-color: var(--rust);
+}
+
+.cg-starred:has(:checked) {
+	color: var(--ink);
+}
+
+.wp-block-post-content:has(.cg-starred :checked) .cg-books li:not(.is-star) {
+	display: none;
+}
+
+.cg-reading-tools + .cg-reading .cg-year {
 	margin-top: 2rem;
 }
 
@@ -877,16 +912,6 @@ input[type="submit"] {
 	display: block;
 	font-size: 0.9em;
 	color: var(--muted);
-}
-
-.cg-books a {
-	color: var(--ink);
-	text-decoration: none;
-}
-
-.cg-books a:hover {
-	color: var(--rust);
-	text-decoration: underline;
 }
 
 .wp-block-rss__item {

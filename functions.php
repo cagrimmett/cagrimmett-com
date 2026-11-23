@@ -114,6 +114,7 @@ add_filter( 'the_content', function ( $content ) {
 			preg_match_all( '~<li[^>]*>(.*?)</li>~s', $m[3], $items );
 			$rows = '';
 			foreach ( $items[1] as $li ) {
+				$li   = preg_replace( '~</?a\b[^>]*>~i', '', $li ); // Titles only; links in the list are not shown.
 				$li   = str_replace( array( '&nbsp;', "\xC2\xA0" ), ' ', $li );
 				$star = false !== strpos( $li, '★' );
 				$li   = trim( str_replace( '★', '', $li ) );
@@ -124,7 +125,7 @@ add_filter( 'the_content', function ( $content ) {
 					$by   = '<span class="cg-by"><span>' . $p[2] . '</span>' . ( empty( $p[3] ) ? '' : '<span>' . $p[3] . '</span>' ) . '</span>';
 					$note = empty( $p[4] ) ? '' : '<span class="cg-note">' . $p[4] . '</span>';
 				}
-				$rows .= '<li>' . ( $star ? '<span class="cg-star" role="img" aria-label="Recommended">★</span>' : '' ) . '<span class="cg-t">' . $li . '</span> ' . $by . $note . '</li>';
+				$rows .= ( $star ? '<li class="is-star">' : '<li>' ) . ( $star ? '<span class="cg-star" role="img" aria-label="Recommended">★</span>' : '' ) . '<span class="cg-t">' . $li . '</span> ' . $by . $note . '</li>';
 			}
 
 			// Keep any hand-written split ("23 non-fiction, 10 fiction") after the computed count.
@@ -148,6 +149,8 @@ add_filter( 'the_content', function ( $content ) {
 		return $content;
 	}
 
-	$nav = '<nav class="cg-years" aria-label="Jump to year"><ul>' . $toc . '</ul></nav>';
+	// The checkbox filters with CSS :has(), no script.
+	$nav = '<div class="cg-reading-tools"><nav class="cg-years" aria-label="Jump to year"><ul>' . $toc . '</ul></nav>'
+		. '<label class="cg-starred"><input type="checkbox"> ' . esc_html__( 'Starred only', 'cagrimmett-com' ) . '</label></div>';
 	return preg_replace( '~<section class="cg-reading">~', $nav . '$0', $out, 1 );
 }, 12 );
