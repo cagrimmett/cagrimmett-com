@@ -151,6 +151,9 @@ add_filter( 'the_content', function ( $content ) {
 		return $content;
 	}
 
+	// The star in the intro sentence matches the ones in the list.
+	$out = preg_replace( '~<mark[^>]*>\s*★\s*</mark>~u', '<span class="cg-star">★</span>', $out );
+
 	// The checkbox filters with CSS :has(), no script.
 	$nav = '<div class="cg-reading-tools"><nav class="cg-years" aria-label="Jump to year"><ul>' . $toc . '</ul></nav>'
 		. '<label class="cg-starred"><input type="checkbox"> ' . esc_html__( 'Starred only', 'cagrimmett-com' ) . '</label></div>';
