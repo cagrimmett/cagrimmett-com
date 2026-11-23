@@ -97,3 +97,57 @@ add_shortcode( 'cg_post_index', function ( $atts ) {
 
 	return $out;
 } );
+
+/*
+ * Reading page: turns each "year heading, count line, bulleted list" run into a book list
+ * with a year jump list on top. Bullets stay plain "Title by Author (year) ★ - note" in the editor.
+ */
+add_filter( 'the_content', function ( $content ) {
+	if ( ! is_page( 'reading' ) || ! in_the_loop() || ! is_main_query() ) {
+		return $content;
+	}
+
+	$toc = '';
+	$out = preg_replace_callback(
+		'~<h2[^>]*>\s*(\d{4})\s*</h2>\s*(?:<p[^>]*>(.*?)</p>\s*)?<ul[^>]*>(.*?)</ul>~s',
+		function ( $m ) use ( &$toc ) {
+			preg_match_all( '~<li[^>]*>(.*?)</li>~s', $m[3], $items );
+			$rows = '';
+			foreach ( $items[1] as $li ) {
+				$li   = str_replace( array( '&nbsp;', "\xC2\xA0" ), ' ', $li );
+				$star = false !== strpos( $li, '★' );
+				$li   = trim( str_replace( '★', '', $li ) );
+				$by   = '';
+				$note = '';
+				if ( preg_match( '~^(.*?)\sby\s+(.*?)\s*(?:\((\d{4})\))?(?:\s(?:-|–|&#8211;)\s+(.*))?$~su', $li, $p ) ) {
+					$li   = $p[1];
+					$by   = '<span class="cg-by"><span>' . $p[2] . '</span>' . ( empty( $p[3] ) ? '' : '<span>' . $p[3] . '</span>' ) . '</span>';
+					$note = empty( $p[4] ) ? '' : '<span class="cg-note">' . $p[4] . '</span>';
+				}
+				$rows .= '<li>' . ( $star ? '<span class="cg-star" role="img" aria-label="Recommended">★</span>' : '' ) . '<span class="cg-t">' . $li . '</span> ' . $by . $note . '</li>';
+			}
+
+			// Keep any hand-written split ("23 non-fiction, 10 fiction") after the computed count.
+			$split = isset( $m[2] ) ? trim( wp_strip_all_tags( preg_replace( '~^.*?<br\s*/?>~s', '', $m[2], 1, $n ) ) ) : '';
+			$count = sprintf( _n( '%d book', '%d books', count( $items[1] ), 'cagrimmett-com' ), count( $items[1] ) );
+			$toc  .= sprintf( '<li><a href="#y%1$s">%1$s</a></li>', $m[1] );
+
+			return sprintf(
+				'<section class="cg-reading"><h2 class="cg-year" id="y%1$s">%1$s</h2><p class="cg-count">%2$s</p><ul class="cg-books">%3$s</ul></section>',
+				$m[1],
+				esc_html( $count . ( ! empty( $n ) && '' !== $split ? ' · ' . $split : '' ) ),
+				$rows
+			);
+		},
+		$content,
+		-1,
+		$sections
+	);
+
+	if ( ! $sections ) {
+		return $content;
+	}
+
+	$nav = '<nav class="cg-years" aria-label="Jump to year"><ul>' . $toc . '</ul></nav>';
+	return preg_replace( '~<section class="cg-reading">~', $nav . '$0', $out, 1 );
+}, 12 );

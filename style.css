@@ -6,7 +6,7 @@ Description: Chuck Grimmett's personal site. ET Book, paper and rust, light and 
 Requires at least: 6.6
 Tested up to: 6.9
 Requires PHP: 7.4
-Version: 0.1.1
+Version: 0.2.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: cagrimmett-com
@@ -824,34 +824,69 @@ input[type="submit"] {
 	max-width: 100%;
 }
 
-#reading-list .year {
-	margin-bottom: 5rem;
+/* === reading page: books by year === */
+.cg-years + .cg-reading .cg-year {
+	margin-top: 2rem;
 }
 
-#reading-list .count {
+.cg-count {
 	font-family: var(--ui);
 	font-size: 0.8125rem;
 	color: var(--muted);
 	text-transform: uppercase;
 	letter-spacing: 0.06em;
-	margin-top: -0.9rem;
-	margin-bottom: 1.5rem;
+	margin: 0.35rem 0 1.5rem;
 }
 
-#reading-list .star {
+.cg-books {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.cg-books li {
+	position: relative;
+	padding: 0.3rem 0 0.3rem 1.5rem;
+	line-height: 1.35;
+}
+
+.cg-star {
 	color: var(--rust);
-	padding-left: 3px;
 }
 
-#reading-list a {
-	color: var(--ink);
+/* Stars sit in a gutter so recommendations line up down the page. */
+.cg-books .cg-star {
+	position: absolute;
+	left: 0;
 }
 
-#reading-list .author,
-#reading-list .pub-year {
+.cg-by {
+	display: inline-block;
+	padding-left: 0.35rem;
+	font-family: var(--ui);
+	font-size: 0.8125rem;
+	font-variant-numeric: tabular-nums;
+	color: var(--muted);
+}
+
+.cg-by span + span {
+	padding-left: 0.5rem;
+}
+
+.cg-note {
+	display: block;
 	font-size: 0.9em;
 	color: var(--muted);
-	padding-left: 3px;
+}
+
+.cg-books a {
+	color: var(--ink);
+	text-decoration: none;
+}
+
+.cg-books a:hover {
+	color: var(--rust);
+	text-decoration: underline;
 }
 
 .wp-block-rss__item {
