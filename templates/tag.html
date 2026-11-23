@@ -1,0 +1,41 @@
+<!-- wp:group {"className":"cg-shell","layout":{"type":"default"}} -->
+<div class="wp-block-group cg-shell"><!-- wp:template-part {"slug":"sidebar","tagName":"header","className":"cg-side"} /-->
+
+<!-- wp:group {"tagName":"main","className":"cg-main","layout":{"type":"default"}} -->
+<main class="wp-block-group cg-main"><!-- wp:group {"className":"cg-head","layout":{"type":"default"}} -->
+<div class="wp-block-group cg-head"><!-- wp:query-title {"type":"archive","showPrefix":false} /-->
+
+<!-- wp:paragraph -->
+<p><a href="/blog/topics/">Taxonomies</a></p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:term-description /-->
+
+<!-- wp:query {"query":{"perPage":20,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","inherit":true},"className":"cg-stream","layout":{"type":"default"}} -->
+<div class="wp-block-query cg-stream"><!-- wp:post-template {"layout":{"type":"default"}} -->
+<!-- wp:post-title {"isLink":true} /-->
+
+<!-- wp:group {"className":"cg-meta","layout":{"type":"default"}} -->
+<div class="wp-block-group cg-meta"><!-- wp:post-date {"format":"M j, Y","isLink":true} /-->
+
+<!-- wp:post-terms {"term":"category"} /--></div>
+<!-- /wp:group -->
+
+<!-- wp:post-featured-image {"isLink":true} /-->
+
+<!-- wp:post-content {"metadata":{"ignoredHookedBlocks":["activitypub/reactions"]},"layout":{"type":"default"}} /-->
+<!-- /wp:post-template -->
+
+<!-- wp:query-pagination {"layout":{"type":"flex","justifyContent":"space-between"}} -->
+<!-- wp:query-pagination-previous {"label":"Newer"} /-->
+
+<!-- wp:query-pagination-numbers /-->
+
+<!-- wp:query-pagination-next {"label":"Older"} /-->
+<!-- /wp:query-pagination --></div>
+<!-- /wp:query --></main>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer","className":"cg-footer"} /-->
