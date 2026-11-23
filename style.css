@@ -6,7 +6,7 @@ Description: Chuck Grimmett's personal site. ET Book, paper and rust, light and 
 Requires at least: 6.6
 Tested up to: 6.9
 Requires PHP: 7.4
-Version: 0.2.6
+Version: 0.3.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: cagrimmett-com
@@ -837,6 +837,55 @@ input[type="submit"] {
 
 .micropub-img {
 	max-width: 100%;
+}
+
+/* === categories and tags index === */
+.cg-terms {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	columns: 2;
+	column-gap: 2.5rem;
+	font-family: var(--ui);
+	font-size: 0.8125rem;
+	font-variant-numeric: tabular-nums;
+	color: var(--muted);
+}
+
+.cg-terms li {
+	padding: 0.2rem 0;
+	break-inside: avoid;
+}
+
+.cg-terms a {
+	margin-right: 0.3rem;
+	font-family: var(--wp--preset--font-family--body);
+	font-size: var(--wp--preset--font-size--medium);
+	color: var(--ink);
+	text-decoration: none;
+}
+
+.cg-terms a:hover {
+	color: var(--rust);
+	text-decoration: underline;
+}
+
+/* Hundreds of tags: run them together instead of one per line. */
+.cg-terms--flow {
+	columns: auto;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0 1.25rem;
+}
+
+.cg-terms--flow a {
+	font-size: 1.0625rem;
+}
+
+@media (max-width: 480px) {
+	.cg-terms {
+		columns: 1;
+	}
 }
 
 /* === reading page: books by year === */
