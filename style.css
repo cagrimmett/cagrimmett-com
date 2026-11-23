@@ -6,7 +6,7 @@ Description: Chuck Grimmett's personal site. ET Book, paper and rust, light and 
 Requires at least: 6.6
 Tested up to: 6.9
 Requires PHP: 7.4
-Version: 0.2.2
+Version: 0.2.3
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: cagrimmett-com
@@ -881,7 +881,7 @@ input[type="submit"] {
 
 .cg-books li {
 	position: relative;
-	padding: 0.3rem 0 0.3rem 1.5rem;
+	padding: 0.3rem 0 0.3rem 1.25rem;
 	line-height: 1.35;
 }
 
@@ -892,7 +892,9 @@ input[type="submit"] {
 /* Stars sit in a gutter so recommendations line up down the page. */
 .cg-books .cg-star {
 	position: absolute;
-	left: 0;
+	left: 0.15rem;
+	font-size: 0.6em;
+	line-height: calc(1.35em / 0.6); /* matches the row's line box so the small star centres on the first line */
 }
 
 .cg-by {
