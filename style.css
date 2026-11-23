@@ -6,7 +6,7 @@ Description: Chuck Grimmett's personal site. ET Book, paper and rust, light and 
 Requires at least: 6.6
 Tested up to: 6.9
 Requires PHP: 7.4
-Version: 0.2.5
+Version: 0.2.6
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: cagrimmett-com
@@ -671,6 +671,15 @@ h3 {
 	margin-block-start: 3.5rem;
 	border-top: 1px solid var(--rule);
 	padding-top: 1.5rem;
+}
+
+/* The reactions heading is bookkeeping: a small label, close to its avatars. */
+.wp-block-activitypub-reactions h6 {
+	margin: 0 0 0.25rem;
+	font-family: var(--ui);
+	font-size: 0.8125rem;
+	font-weight: 400;
+	color: var(--muted);
 }
 
 .cg-after .wp-block-post-author {
