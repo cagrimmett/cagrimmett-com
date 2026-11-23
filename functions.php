@@ -159,3 +159,17 @@ add_filter( 'the_content', function ( $content ) {
 		. '<label class="cg-starred"><input type="checkbox"> ' . esc_html__( 'Starred only', 'cagrimmett-com' ) . '</label></div>';
 	return preg_replace( '~<section class="cg-reading">~', $nav . '$0', $out, 1 );
 }, 12 );
+
+/*
+ * Tags and categories removed in the 2026 cleanup: send an old address to its replacement,
+ * or to the categories and tags page when it has none. Only acts on a 404.
+ */
+add_action( 'template_redirect', function () {
+	if ( ! is_404() || ! preg_match( '~^/(tag|category)/([^/]+)/?~', (string) wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ), $m ) ) {
+		return;
+	}
+	$map = require __DIR__ . '/term-redirects.php';
+	$key = $m[1] . '/' . sanitize_title( $m[2] );
+	wp_safe_redirect( home_url( '/' . ( $map[ $key ] ?? 'blog/topics' ) . '/' ), 301 );
+	exit;
+}, 1 );
